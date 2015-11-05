@@ -86,7 +86,7 @@ public class Main {
         insertAlbum(conn, "What's Goin' On", "Marvin Gay", "R&B");
         */
 
-        Spark.externalStaticFileLocation("public");
+        Spark.externalStaticFileLocation("client");
         Spark.init();
 
         Spark.get(
