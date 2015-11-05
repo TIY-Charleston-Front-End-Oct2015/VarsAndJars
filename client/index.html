@@ -4,6 +4,15 @@
   <meta charset="UTF-8">
   <title>Var & Jars</title>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" media="screen" title="no title" charset="utf-8">
+  <script type="text/html" id="dateTmpl">
+    <article class="date">
+      <ul>
+        <li>Music: <%= album.name %></li>
+        <li>Food: <%= food.name %></li>
+        <li>Drink: <%= drink.name %></li>
+      </ul>
+    </article>
+  </script>
 </head>
 <body>
   <header>
@@ -12,9 +21,10 @@
   <div class="container">
     <!-- drink food music goes here -->
     <div class="col-md-6">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </p>
+      <button type="button" class="noLikey" name="button">no likey</button>
+      <div class="dateDiv">
+
+      </div>
     </div>
     <div class="col-md-6">
       <p>
