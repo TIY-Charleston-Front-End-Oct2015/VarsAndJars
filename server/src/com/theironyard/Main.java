@@ -1,5 +1,6 @@
 package com.theironyard;
 
+import jodd.json.JsonSerializer;
 import spark.Spark;
 
 import java.sql.*;
@@ -24,6 +25,44 @@ public class Main {
         stmt.setString(2, artist);
         stmt.setString(3, genre);
         stmt.execute();
+    }
+
+    public static Date generateDate(Connection conn) throws SQLException {
+        Statement stmt = conn.createStatement();
+
+        Food food = null;
+        Drink drink = null;
+        Album album = null;
+
+        ResultSet resultsFood = stmt.executeQuery("SELECT * FROM food ORDER BY RAND() LIMIT 1");
+        if (resultsFood.next()) {
+            food = new Food();
+            food.id = resultsFood.getInt("id");
+            food.name = resultsFood.getString("name");
+        }
+
+        ResultSet resultsDrink = stmt.executeQuery("SELECT * FROM drinks ORDER BY RAND() LIMIT 1");
+        if (resultsDrink.next()) {
+            drink = new Drink();
+            drink.id = resultsDrink.getInt("id");
+            drink.name = resultsDrink.getString("name");
+        }
+
+        ResultSet resultsAlbum = stmt.executeQuery("SELECT * FROM albums ORDER BY RAND() LIMIT 1");
+        if (resultsAlbum.next()) {
+            album = new Album();
+            album.id = resultsAlbum.getInt("id");
+            album.name = resultsAlbum.getString("name");
+            album.artist = resultsAlbum.getString("artist");
+            album.genre = resultsAlbum.getString("genre");
+        }
+
+        Date date = new Date();
+        date.food = food;
+        date.drink = drink;
+        date.album = album;
+
+        return date;
     }
 
     public static void main(String[] args) throws SQLException {
@@ -53,7 +92,9 @@ public class Main {
         Spark.get(
                 "/random",
                 ((request, response) -> {
-                    return "";
+                    Date date = generateDate(conn);
+                    JsonSerializer serializer = new JsonSerializer();
+                    return serializer.serialize(date);
                 })
         );
     }
