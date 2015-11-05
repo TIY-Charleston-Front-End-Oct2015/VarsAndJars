@@ -1,5 +1,7 @@
 package com.theironyard;
 
+import spark.Spark;
+
 import java.sql.*;
 
 public class Main {
@@ -45,6 +47,14 @@ public class Main {
         insertAlbum(conn, "What's Goin' On", "Marvin Gay", "R&B");
         */
 
-        
+        Spark.externalStaticFileLocation("public");
+        Spark.init();
+
+        Spark.get(
+                "/random",
+                ((request, response) -> {
+                    return "";
+                })
+        );
     }
 }
